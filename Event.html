@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Event Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>NGO Event Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="about-link">About</a></li>
+                <li><a href="#" id="events-link">Events</a></li>
+                <li><a href="#" id="create-event-link">Create Event</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="event-image">
+        <!-- Event Image -->
+        <img src="https://www.impactguru.com/info/wp-content/uploads/2023/07/Fundraising-ideas-NGO.jpg" alt="Event Image" style="max-width: 100%;">
+    </section>
+    <section id="about" style="display: none;">
+        <!-- About Section Content -->
+        <h2>About NGO Event Platform</h2>
+        <p>Welcome to the NGO Event Platform! Our platform is designed to help NGOs organize and manage their events more effectively. Whether it's raising awareness, fundraising, or community engagement, our platform provides the tools you need to create successful events.</p>
+    </section>
+    <section id="events" style="display: none;">
+        <!-- Upcoming Events Section Content -->
+        <h2>Upcoming Events</h2>
+        <ul id="event-list"></ul>
+    </section>
+    <section id="create-event" style="display: none;">
+        <!-- Create Event Form -->
+        <h2>Create New Event</h2>
+        <form id="event-form">
+            <label for="event-name">Event Name:</label>
+            <input type="text" id="event-name" name="event-name" required>
+            
+            <label for="event-date">Event Date:</label>
+            <input type="date" id="event-date" name="event-date" required>
+            
+            <label for="event-description">Event Description:</label>
+            <textarea id="event-description" name="event-description" required></textarea>
+            
+            <label for="event-location">Event Location:</label>
+            <input type="text" id="event-location" name="event-location" required>
+            
+            <button type="submit">Create Event</button>
+        </form>
+    </section>
+    <footer>
+        <!-- Footer Content -->
+        &copy; 2024 NGO Event Platform
+    </footer>
+
+    <script>
+        var eventNames = []; // Array to store event names
+
+        document.getElementById("about-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("about").style.display = "block"; // Show the about section
+            document.getElementById("events").style.display = "none"; // Hide events section
+            document.getElementById("create-event").style.display = "none"; // Hide create event section
+        });
+
+        document.getElementById("events-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("about").style.display = "none"; // Hide the about section
+            document.getElementById("events").style.display = "block"; // Show the events section
+            document.getElementById("create-event").style.display = "none"; // Hide create event section
+
+            // Display the list of event names
+            displayEventNames();
+        });
+
+        document.getElementById("create-event-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("about").style.display = "none"; // Hide the about section
+            document.getElementById("events").style.display = "none"; // Hide events section
+            document.getElementById("create-event").style.display = "block"; // Show the create event section
+        });
+
+        document.getElementById("event-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            var eventName = document.getElementById("event-name").value;
+            var eventDate = document.getElementById("event-date").value;
+            var eventDescription = document.getElementById("event-description").value;
+            var eventLocation = document.getElementById("event-location").value;
+
+            // Add event name to the array
+            eventNames.push(eventName);
+
+            // Show events section
+            document.getElementById("events").style.display = "block";
+
+            // Hide create event section
+            document.getElementById("create-event").style.display = "none";
+        });
+
+        function displayEventNames() {
+            var eventList = document.getElementById("event-list");
+            eventList.innerHTML = ""; // Clear existing list
+
+            eventNames.forEach(function(eventName) {
+                var listItem = document.createElement("li");
+                listItem.textContent = eventName;
+                eventList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
